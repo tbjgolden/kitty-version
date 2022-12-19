@@ -1,22 +1,25 @@
 {
-  "name": "npm-lib-name",
+  "name": "kitty-version",
   "version": "0.1.0",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
   "types": "dist/esm/index.d.ts",
-  "homepage": "https://github.com/tbjgolden/npm-lib-name",
+  "homepage": "https://github.com/tbjgolden/kitty-version",
   "author": {
     "name": "Tom Golden",
     "email": "oss@tom.bio",
     "url": "https://tom.bio"
   },
   "type": "module",
+  "os": [
+    "!win32"
+  ],
   "bin": {
-    "npm-lib-name": "./dist/cli/index.mjs"
+    "kitty-version": "./dist/cli/index.mjs"
   },
   "engines": {
-    "node": ">=16.14.0",
+    "node": ">=14.13.1 ~12.20.0",
     "npm": ">=6.8.0"
   },
   "scripts": {

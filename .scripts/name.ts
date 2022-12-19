@@ -10,7 +10,7 @@ const escapeRegExp = (str: string): string => {
   return str.replace(/[$()*+.?[\\\]^{|}]/g, "\\$&"); // $& means the whole matched string
 };
 
-const currentName = "npm-lib-name";
+const currentName = "kitty-version";
 
 const main = async () => {
   await checkDirectory();
@@ -52,7 +52,7 @@ const main = async () => {
     }
   });
 
-  const re = new RegExp(escapeRegExp("npm-lib-name"), "g");
+  const re = new RegExp(escapeRegExp("kitty-version"), "g");
   for (const filePath of files) {
     fs.writeFileSync(filePath, fs.readFileSync(filePath, "utf8").replace(re, result));
   }
@@ -61,7 +61,7 @@ const main = async () => {
     // should only run on first name
     if (currentName === `npm${"-"}lib${"-"}name`) {
       await deleteFolder(path.join(projectRoot, ".git"));
-      execSync("git init && git add . && git commit -m 'Initial commit from npm-lib-name'", {
+      execSync("git init && git add . && git commit -m 'Initial commit from kitty-version'", {
         cwd: projectRoot,
       });
       console.log("New git repo created");

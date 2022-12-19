@@ -128,7 +128,7 @@ const patchs: Commit[] = [];
 {
   let currVersionStr: string;
   try {
-    currVersionStr = execSync(`npm show 'npm-lib-name' version`, {
+    currVersionStr = execSync(`npm show 'kitty-version' version`, {
       stdio: ["ignore", "pipe", "ignore"],
     }).toString();
   } catch {
@@ -136,7 +136,7 @@ const patchs: Commit[] = [];
     if (await dnsLookup("https://example.com")) {
       currVersionStr = "0.0.0-new";
     } else {
-      console.log("error determining latest version of npm-lib-name on npm registry");
+      console.log("error determining latest version of kitty-version on npm registry");
       process.exit(1);
     }
   }

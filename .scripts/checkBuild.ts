@@ -25,8 +25,10 @@ if (await isFile("cli/index.ts")) {
         process.exit(1);
       }
       const command = `${cliFilePath} arg1 arg2`;
-      const stdout = execSync(command).toString();
-      const expected = `Hello arg1 arg2!\n`;
+      const stdout = execSync(command, {
+        env: { ...process.env, TERM: "xterm-256color" },
+      }).toString();
+      const expected = `undefined\n`;
       if (stdout !== expected) {
         console.log(`unexpected response when running: ${command}\n`);
         console.log("expected:");
@@ -52,13 +54,12 @@ if (await isFile("lib/index.ts")) {
       process.exit(1);
     }
 
-    const { hello } = await import(join(process.cwd(), packageJson.module));
+    const { kittyVersion } = await import(join(process.cwd(), packageJson.module));
 
-    const result = hello("arg1 arg2");
-    const expected = `Hello arg1 arg2!`;
-    if (result !== expected) {
+    const result = kittyVersion();
+    if (result !== undefined && typeof result !== "string") {
       console.log("expected:");
-      console.log(JSON.stringify(expected));
+      console.log("<version string or undefined>");
       console.log("actual:");
       console.log(JSON.stringify(result));
       process.exit(1);
@@ -77,13 +78,12 @@ if (await isFile("lib/index.ts")) {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires, unicorn/prefer-module
-  const { hello } = require(join(process.cwd(), packageJson.main));
+  const { kittyVersion } = require(join(process.cwd(), packageJson.main));
 
-  const result = hello("arg1 arg2");
-  const expected = `Hello arg1 arg2!`;
-  if (result !== expected) {
+  const result = kittyVersion();
+  if (result !== undefined && typeof result !== "string") {
     console.log("expected:");
-    console.log(JSON.stringify(expected));
+    console.log("<version string or undefined>");
     console.log("actual:");
     console.log(JSON.stringify(result));
     process.exit(1);
